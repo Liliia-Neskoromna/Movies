@@ -13,6 +13,7 @@
 		22AF9B2A24ED08450099D9BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22AF9B2824ED08450099D9BC /* Main.storyboard */; };
 		22AF9B2C24ED08470099D9BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22AF9B2B24ED08470099D9BC /* Assets.xcassets */; };
 		22AF9B2F24ED08470099D9BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22AF9B2D24ED08470099D9BC /* LaunchScreen.storyboard */; };
+		22AF9B3A24ED18FD0099D9BC /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF9B3924ED18FD0099D9BC /* FilmTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		22AF9B2B24ED08470099D9BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22AF9B2E24ED08470099D9BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22AF9B3024ED08470099D9BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22AF9B3924ED18FD0099D9BC /* FilmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				22AF9B2224ED08450099D9BC /* AppDelegate.swift */,
 				22AF9B2424ED08450099D9BC /* SceneDelegate.swift */,
 				22AF9B2624ED08450099D9BC /* ViewController.swift */,
+				22AF9B3924ED18FD0099D9BC /* FilmTableViewCell.swift */,
 				22AF9B2824ED08450099D9BC /* Main.storyboard */,
 				22AF9B2B24ED08470099D9BC /* Assets.xcassets */,
 				22AF9B2D24ED08470099D9BC /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22AF9B2724ED08450099D9BC /* ViewController.swift in Sources */,
+				22AF9B3A24ED18FD0099D9BC /* FilmTableViewCell.swift in Sources */,
 				22AF9B2324ED08450099D9BC /* AppDelegate.swift in Sources */,
 				22AF9B2524ED08450099D9BC /* SceneDelegate.swift in Sources */,
 			);
