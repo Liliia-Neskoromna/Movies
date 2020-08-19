@@ -7,13 +7,32 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+//enum CurrentSegmentType: String {
+//    case popular, upcoming, topRated
+//    
+//    var urlString: String {
+//        switch self {
+//        case .popular:
+//            return "https://api.themoviedb.org/3/movie/popular?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
+//        case .topRated:
+//            return "https://api.themoviedb.org/3/movie/top_rated?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
+//        default:
+//            return "https://api.themoviedb.org/3/movie/upcoming?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
+//        }
+//    }
+//}
+
+class FilmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var filmTableView: UITableView!
     
-    
     let kReUseId = "cellForFilms"
+    
+    //доробити
+    //let params: [String: String] = ["api-key": "kcZPVVrUr4PUmXGnWGT8trQK1pe7A7mX"]
     var films = [Any]()
     //        [FilmModel]() {
     //        didSet {
@@ -22,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //            }
     //        }
     //    }
+//    var currentControllerType: CurrentSegmentType = .upcoming
     
     
     override func viewDidAppear(_ animated: Bool) {
