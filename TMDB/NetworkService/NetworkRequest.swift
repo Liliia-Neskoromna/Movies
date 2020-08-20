@@ -5,7 +5,6 @@
 //  Created by Lilia on 8/19/20.
 //  Copyright © 2020 Liliia. All rights reserved.
 //
-
 import Foundation
 import Alamofire
 import SwiftyJSON
@@ -29,13 +28,10 @@ class NetworkRequest {
     
     static let shared = NetworkRequest()
     
-    func loadData(completion: @escaping ([FilmModel]) -> Void) {
+    func loadData(_ segment: CurrentSegmentType, completion: @escaping ([FilmModel]) -> Void) {
         
         var filmArray = [FilmModel]()
-        
-        let currentSegmentType: CurrentSegmentType = .upcoming
-        
-        AF.request(currentSegmentType.urlString, method: .get).responseJSON { (response) in
+        AF.request(segment.urlString, method: .get).responseJSON { (response) in
             
             switch response.result {
             case .success:
@@ -48,19 +44,15 @@ class NetworkRequest {
                 
                 for result in results {
                     
-                    let image = result["poster_path"].stringValue
+                    let image = result["backdrop_path"].stringValue
+                    let fullImage = "https://image.tmdb.org/t/p/w500" + image
                     let title = result["title"].stringValue
                     let overview = result["overview"].stringValue
                     
-                    let film = FilmModel(title: title, overview: overview, posterPath: image)
+                    let film = FilmModel(title: title, overview: overview, posterPath: fullImage)
                     
                     filmArray.append(film)
                     completion(filmArray)
-                    
-                    print("Title - \(title)")
-                    print("Image - \(image)")
-                    print("Overview - \(overview)")
-                    
                 }
                 
             case let .failure(error):

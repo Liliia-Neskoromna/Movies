@@ -16,54 +16,68 @@ class FilmViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var segmentControll: UISegmentedControl!
     
     let kReUseId = "cellForFilms"
+    static let foop = CurrentSegmentType.self
     
     let network = NetworkRequest.shared
     var films = [FilmModel]() {
-            didSet {
-                DispatchQueue.main.async {
-                    self.filmTableView.reloadData()
-                }
+        didSet {
+            DispatchQueue.main.async {
+                self.filmTableView.reloadData()
             }
-        }    
+        }
+    }
+    
+    var currentSegmentType: CurrentSegmentType = .popular
     
     override func viewDidAppear(_ animated: Bool) {
         let nav = self.navigationController?.navigationBar
-        
         nav?.barStyle = UIBarStyle.black
         nav?.tintColor = UIColor.clear
         nav?.topItem?.title = "TMDB"
         nav?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.cyan]
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.filmTableView.register(FilmTableViewCell.self, forCellReuseIdentifier: kReUseId)
         filmTableView.dataSource = self
         filmTableView.delegate = self
+        filmTableView.tag = 1
         
-//        network.loadData(completion: { [weak self] data in
-//            self?.films = data
-//            print(self?.films as Any)
-//            self?.filmTableView.reloadData()
-//        })
+        self.showActivityIndicator()
+        network.loadData(FilmViewController.foop, completion: { [weak self] data  in
+            self?.films = data
+            self?.hideActivityIndicator()
+        })
     }
     
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            view.backgroundColor = .black
-            network.loadData(completion: { [weak self] data in
-            self?.films = data
-            })
+//            filmTableView.tag = 1
+//            self.showActivityIndicator()
+//            network.loadData(.popular, completion: { [weak self] data in
+//                self?.films = data
+//                self?.hideActivityIndicator()
+//            })
         }
+            
         else if sender.selectedSegmentIndex == 1 {
-            view.backgroundColor = .red
+            self.showActivityIndicator()
+//            filmTableView.tag = 2
+//            network.loadData(.upcoming, completion: { [weak self] data in
+//                self?.films = data
+//                self?.hideActivityIndicator()
+//            })
         }
+            
         else if sender.selectedSegmentIndex == 2 {
-            view.backgroundColor = .green
+            self.showActivityIndicator()
+//            filmTableView.tag = 3
+//            network.loadData(.topRated, completion: { [weak self] data in
+//                self?.films = data
+//                self?.hideActivityIndicator()
+//            })
         }
     }
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -76,14 +90,13 @@ class FilmViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = filmTableView.dequeueReusableCell(withIdentifier: kReUseId,
-                                                            for: indexPath) as? FilmTableViewCell else {fatalError("Bad Cell")}
+                                                           for: indexPath) as? FilmTableViewCell else {fatalError("Bad Cell")}
         
         cell.titleLabel?.text = self.films[indexPath.row].title
-        cell.posterImage.imageFromServerURL(self.films[indexPath.row].posterPath)
+        cell.backDropImage.imageFromServerURL(self.films[indexPath.row].posterPath)
         cell.discriptionLabel?.text = self.films[indexPath.row].overview
         
         return cell
     }
-    
 }
 

@@ -10,12 +10,14 @@ import UIKit
 
 class FilmTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var posterImage: UIImageView!
+    //@IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var discriptionLabel: UILabel!
-
+    @IBOutlet weak var backDropImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        discriptionLabel.adjustsFontSizeToFitWidth = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
