@@ -10,19 +10,20 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class FilmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+//UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var filmTableView: UITableView!
+    @IBOutlet weak var myTableView: UITableView!
+    //@IBOutlet weak var filmTableView: UITableView!
     @IBOutlet weak var segmentControll: UISegmentedControl!
     
-    let kReUseId = "cellForFilms"
     static let foop = CurrentSegmentType.self
     
     let network = NetworkRequest.shared
     var films = [FilmModel]() {
         didSet {
             DispatchQueue.main.async {
-                self.filmTableView.reloadData()
+                self.myTableView.reloadData()
             }
         }
     }
@@ -39,14 +40,18 @@ class FilmViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        filmTableView.dataSource = self
-        filmTableView.delegate = self
-        filmTableView.tag = 1
         
-        self.showActivityIndicator()
-        network.loadData(FilmViewController.foop, completion: { [weak self] data  in
+        let nib = UINib.init(nibName: K.nibName, bundle: nil)
+        self.myTableView.register(nib, forCellReuseIdentifier: K.cellIdentifire)
+        
+        myTableView.dataSource = self
+        myTableView.delegate = self
+       // myTableView.tag = 1
+        
+        //self.showActivityIndicator()
+        network.loadData(.popular, completion: { [weak self] data  in
             self?.films = data
-            self?.hideActivityIndicator()
+           // self?.hideActivityIndicator()
         })
     }
     
@@ -89,14 +94,14 @@ class FilmViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = filmTableView.dequeueReusableCell(withIdentifier: kReUseId,
-                                                           for: indexPath) as? FilmTableViewCell else {fatalError("Bad Cell")}
+        let cell = myTableView.dequeueReusableCell(withIdentifier: K.cellIdentifire, for: indexPath) as! FilmCustomCell
         
         cell.titleLabel?.text = self.films[indexPath.row].title
         cell.backDropImage.imageFromServerURL(self.films[indexPath.row].posterPath)
-        cell.discriptionLabel?.text = self.films[indexPath.row].overview
+        cell.overviewLabel?.text = self.films[indexPath.row].overview
         
         return cell
     }
+    
 }
 
