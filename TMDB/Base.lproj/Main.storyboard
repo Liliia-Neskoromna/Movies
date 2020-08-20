@@ -33,19 +33,9 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="separatorColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Ef7-Rc-kI6">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="250"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ef7-Rc-kI6" id="N67-YU-ejP">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="KwV-Hc-2R1"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="oEl-WU-M1m"/>
+                                    <outlet property="dataSource" destination="8bC-Xf-vdC" id="xP0-9P-7Ks"/>
+                                    <outlet property="delegate" destination="8bC-Xf-vdC" id="IOt-fT-hwj"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -62,8 +52,8 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="myTableView" destination="YE9-6P-uX6" id="PcQ-qe-O4X"/>
-                        <outlet property="segmentControll" destination="65P-AM-VAQ" id="39A-8y-nFX"/>
+                        <outlet property="myTableView" destination="YE9-6P-uX6" id="rDY-Lx-o7A"/>
+                        <outlet property="segmentControll" destination="65P-AM-VAQ" id="vUq-UV-z0x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

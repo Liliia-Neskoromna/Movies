@@ -9,17 +9,17 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-enum CurrentSegmentType: String {
+enum CurrentCategory: String {
     case popular, upcoming, topRated
     
     var urlString: String {
         switch self {
         case .popular:
-            return "https://api.themoviedb.org/3/movie/popular?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
+            return "/popular"
         case .topRated:
-            return "https://api.themoviedb.org/3/movie/top_rated?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
+            return "/top_rated"
         default:
-            return "https://api.themoviedb.org/3/movie/upcoming?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
+            return "/upcoming"
         }
     }
 }
@@ -28,10 +28,10 @@ class NetworkRequest {
     
     static let shared = NetworkRequest()
     
-    func loadData(_ segment: CurrentSegmentType, completion: @escaping ([FilmModel]) -> Void) {
+    func loadData(_ segment: CurrentCategory, completion: @escaping ([FilmModel]) -> Void) {
         
         var filmArray = [FilmModel]()
-        AF.request(segment.urlString, method: .get).responseJSON { (response) in
+        AF.request(K.Urls.baseUrl + segment.urlString, method: .get, parameters: self.getParams()).responseJSON { (response) in
             
             switch response.result {
             case .success:
@@ -60,5 +60,13 @@ class NetworkRequest {
                 completion([])
             }
         }
+    }
+    
+    func getParams(page: String = "1") -> [String: String] {
+        return [
+            "api_key": "76984f3d864f02cb288e53d24f6e7d6b",
+            "language": "ru-Ru",
+            "page": "\(page)"
+        ]
     }
 }

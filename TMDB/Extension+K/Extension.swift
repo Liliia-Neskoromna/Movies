@@ -32,6 +32,7 @@ extension UIImageView {
         }
     }
 }
+// MARK: - Extension for FilmViewController
 
 var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
 var loadingView: UIView = UIView()
@@ -65,5 +66,11 @@ extension FilmViewController {
             spinner.stopAnimating()
             loadingView.removeFromSuperview()
         }
+    }
+}
+
+extension FilmViewController {
+    func didUpdateFilmsList(films: [FilmModel]) {
+        self.films = films
     }
 }

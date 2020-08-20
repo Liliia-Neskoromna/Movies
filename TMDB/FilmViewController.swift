@@ -10,16 +10,12 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-//UITableViewDelegate, UITableViewDataSource {
+class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilmsManagerDelegate {
     
     @IBOutlet weak var myTableView: UITableView!
-    //@IBOutlet weak var filmTableView: UITableView!
     @IBOutlet weak var segmentControll: UISegmentedControl!
     
-    static let foop = CurrentSegmentType.self
-    
-    let network = NetworkRequest.shared
+    var filmsManager = FilmsManager()
     var films = [FilmModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -27,9 +23,7 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
     }
-    
-    var currentSegmentType: CurrentSegmentType = .popular
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.black
@@ -46,43 +40,14 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         myTableView.dataSource = self
         myTableView.delegate = self
-       // myTableView.tag = 1
-        
-        //self.showActivityIndicator()
-        network.loadData(.popular, completion: { [weak self] data  in
-            self?.films = data
-           // self?.hideActivityIndicator()
-        })
+        filmsManager.delegate = self
+        filmsManager.loadSegmentData(index: 0)
     }
     
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-//            filmTableView.tag = 1
-//            self.showActivityIndicator()
-//            network.loadData(.popular, completion: { [weak self] data in
-//                self?.films = data
-//                self?.hideActivityIndicator()
-//            })
-        }
-            
-        else if sender.selectedSegmentIndex == 1 {
-            self.showActivityIndicator()
-//            filmTableView.tag = 2
-//            network.loadData(.upcoming, completion: { [weak self] data in
-//                self?.films = data
-//                self?.hideActivityIndicator()
-//            })
-        }
-            
-        else if sender.selectedSegmentIndex == 2 {
-            self.showActivityIndicator()
-//            filmTableView.tag = 3
-//            network.loadData(.topRated, completion: { [weak self] data in
-//                self?.films = data
-//                self?.hideActivityIndicator()
-//            })
-        }
+        filmsManager.loadSegmentData(index: sender.selectedSegmentIndex)
     }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -102,6 +67,4 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         return cell
     }
-    
 }
-
