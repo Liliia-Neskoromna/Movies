@@ -9,7 +9,9 @@
 import Foundation
 
 struct FilmModel {
+    
     var title: String
     var overview: String
     var posterPath: String
+    
 }

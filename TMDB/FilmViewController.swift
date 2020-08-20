@@ -10,39 +10,21 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-//enum CurrentSegmentType: String {
-//    case popular, upcoming, topRated
-//    
-//    var urlString: String {
-//        switch self {
-//        case .popular:
-//            return "https://api.themoviedb.org/3/movie/popular?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
-//        case .topRated:
-//            return "https://api.themoviedb.org/3/movie/top_rated?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
-//        default:
-//            return "https://api.themoviedb.org/3/movie/upcoming?api_key=76984f3d864f02cb288e53d24f6e7d6b&language=ru-Ru&page=1"
-//        }
-//    }
-//}
-
 class FilmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var filmTableView: UITableView!
+    @IBOutlet weak var segmentControll: UISegmentedControl!
     
     let kReUseId = "cellForFilms"
     
-    //доробити
-    //let params: [String: String] = ["api-key": "kcZPVVrUr4PUmXGnWGT8trQK1pe7A7mX"]
-    var films = [Any]()
-    //        [FilmModel]() {
-    //        didSet {
-    //            DispatchQueue.main.async {
-    //                self.tableView.reloadData()
-    //            }
-    //        }
-    //    }
-//    var currentControllerType: CurrentSegmentType = .upcoming
-    
+    let network = NetworkRequest.shared
+    var films = [FilmModel]() {
+            didSet {
+                DispatchQueue.main.async {
+                    self.filmTableView.reloadData()
+                }
+            }
+        }    
     
     override func viewDidAppear(_ animated: Bool) {
         let nav = self.navigationController?.navigationBar
@@ -56,27 +38,37 @@ class FilmViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.filmTableView.register(FilmTableViewCell.self, forCellReuseIdentifier: kReUseId)
+        //self.filmTableView.register(FilmTableViewCell.self, forCellReuseIdentifier: kReUseId)
+        filmTableView.dataSource = self
+        filmTableView.delegate = self
         
-        
+//        network.loadData(completion: { [weak self] data in
+//            self?.films = data
+//            print(self?.films as Any)
+//            self?.filmTableView.reloadData()
+//        })
     }
+    
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             view.backgroundColor = .black
+            network.loadData(completion: { [weak self] data in
+            self?.films = data
+            })
         }
         else if sender.selectedSegmentIndex == 1 {
-            view.backgroundColor = .black
+            view.backgroundColor = .red
         }
         else if sender.selectedSegmentIndex == 2 {
-            view.backgroundColor = .black
+            view.backgroundColor = .green
         }
-        
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
     }
@@ -86,11 +78,9 @@ class FilmViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let cell = filmTableView.dequeueReusableCell(withIdentifier: kReUseId,
                                                             for: indexPath) as? FilmTableViewCell else {fatalError("Bad Cell")}
         
-//        cell.titleLabel?.text = self.articles[indexPath.row].title
-//        cell.detailsLabel?.text = self.articles[indexPath.row].abstract
-//        cell.imageArt.imageFromServerURL(self.articles[indexPath.row].image)
-//        cell.favButton.index = indexPath.row
-//        cell.favButton.isSelected = self.articles[indexPath.row].isSelected
+        cell.titleLabel?.text = self.films[indexPath.row].title
+        cell.posterImage.imageFromServerURL(self.films[indexPath.row].posterPath)
+        cell.discriptionLabel?.text = self.films[indexPath.row].overview
         
         return cell
     }

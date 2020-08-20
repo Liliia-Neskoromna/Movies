@@ -25,15 +25,15 @@ enum CurrentSegmentType: String {
     }
 }
 
-
 class NetworkRequest {
     
+    static let shared = NetworkRequest()
     
     func loadData(completion: @escaping ([FilmModel]) -> Void) {
         
         var filmArray = [FilmModel]()
         
-        var currentSegmentType: CurrentSegmentType = .upcoming
+        let currentSegmentType: CurrentSegmentType = .upcoming
         
         AF.request(currentSegmentType.urlString, method: .get).responseJSON { (response) in
             
@@ -43,6 +43,7 @@ class NetworkRequest {
                 guard let json = try? JSON(response.result.get()) else {
                     fatalError("Cannot get json")
                 }
+                
                 let results = json["results"].arrayValue
                 
                 for result in results {
@@ -51,14 +52,20 @@ class NetworkRequest {
                     let title = result["title"].stringValue
                     let overview = result["overview"].stringValue
                     
-                    var film = FilmModel(title: title, overview: overview, posterPath: image)
+                    let film = FilmModel(title: title, overview: overview, posterPath: image)
                     
                     filmArray.append(film)
+                    completion(filmArray)
+                    
+                    print("Title - \(title)")
+                    print("Image - \(image)")
+                    print("Overview - \(overview)")
+                    
                 }
                 
             case let .failure(error):
                 print(error)
-                
+                completion([])
             }
         }
     }
