@@ -14,10 +14,24 @@ struct K {
     struct Urls {
         static let baseUrl = "https://api.themoviedb.org/3/movie"
         
-        static let popular = "/popular"
-        static let toprated = "/top_rated"
-        static let upcoming = "/upcoming"
+//        static let popular = "/popular"
+//        static let toprated = "/top_rated"
+//        static let upcoming = "/upcoming"
     }
     
-   
+    enum CurrentCategory: String {
+        case popular, upcoming, topRated
+        
+        var urlString: String {
+            switch self {
+            case .popular:
+                return "/popular"
+            case .topRated:
+                return "/top_rated"
+            default:
+                return "/upcoming"
+            }
+        }
+    }
+
 }

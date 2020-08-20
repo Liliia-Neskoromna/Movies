@@ -22,4 +22,8 @@ class FilmCustomCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+//    override func addConstraint(_ constraint: NSLayoutConstraint) {
+//        backDropImage.addConstraint(<#T##constraint: NSLayoutConstraint##NSLayoutConstraint#>)
+//    
+    
 }
