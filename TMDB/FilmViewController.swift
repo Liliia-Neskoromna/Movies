@@ -38,6 +38,7 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let nib = UINib.init(nibName: K.nibName, bundle: nil)
         self.myTableView.register(nib, forCellReuseIdentifier: K.cellIdentifire)
         
+        
         myTableView.dataSource = self
         myTableView.delegate = self
         filmsManager.delegate = self
