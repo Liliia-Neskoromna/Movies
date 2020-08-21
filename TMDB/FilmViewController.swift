@@ -15,9 +15,11 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var segmentControll: UISegmentedControl!
     
+    static let shared = FilmViewController()
     var loadingData = false
     private let utilites = Utilities.sharedUtilities
-    static var newPage = " "
+     let storyboardIdentifier = "FilmDetailsViewController"
+//    static var newPage = " "
     
     var arrayTabs = [CGFloat(0.0), CGFloat(0.0), CGFloat(0.0)]
     
@@ -75,5 +77,22 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.overviewLabel?.text = self.films[indexPath.row].overview
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let filmDetailsViewController = storyboard.instantiateViewController(identifier: storyboardIdentifier) as? FilmDetailsViewController {
+            filmDetailsViewController.id = self.films[indexPath.row].id
+            present(filmDetailsViewController, animated: true)
+        }
+        
+//        let urlString = articles[indexPath.row].url
+//        let webViewIdentifier = WebViewController.storyboardIdentifier
+//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//        if let webViewController = storyboard.instantiateViewController(identifier: webViewIdentifier) as? WebViewController {
+//            webViewController.url = urlString
+//            present(webViewController, animated: true)
+//        }
     }
 }

@@ -66,10 +66,15 @@ extension FilmViewController {
             loadingView.removeFromSuperview()
         }
     }
-}
-
-extension FilmViewController {
+    
     func didUpdateFilmsList(films: [FilmModel]) {
         self.films = films
     }
 }
+
+extension Float {
+    var shortValue: String {
+        return String(format: "%.0f", self)
+    }
+}
+

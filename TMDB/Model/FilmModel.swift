@@ -10,8 +10,12 @@ import Foundation
 
 struct FilmModel {
     
+    var id: Int
     var title: String
     var overview: String
     var posterPath: String
     
+//    init(id: Int) {
+//        self.id = id
+//    }
 }
