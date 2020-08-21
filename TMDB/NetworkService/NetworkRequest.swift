@@ -18,7 +18,7 @@ class NetworkRequest {
     func loadData(_ segment: K.CurrentCategory, completion: @escaping ([FilmModel]) -> Void) {
         
         var filmArray = [FilmModel]()
-        AF.request(K.Urls.baseUrl + segment.urlString, method: .get, parameters: utilites.getParams()).responseJSON { (response) in
+        AF.request(K.Urls.baseUrl + segment.urlString, method: .get, parameters: utilites.getParams(page: K.nextPage)).responseJSON { (response) in
             
             switch response.result {
             case .success:
@@ -26,6 +26,7 @@ class NetworkRequest {
                 guard let json = try? JSON(response.result.get()) else {
                     fatalError("Cannot get json")
                 }
+                
                 let results = json["results"].arrayValue
                 
                 for result in results {

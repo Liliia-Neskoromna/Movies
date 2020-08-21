@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="iiw-q3-J9B" userLabel="Title">
-                                <rect key="frame" x="187" y="16" width="40.5" height="23"/>
+                                <rect key="frame" x="40" y="16" width="334" height="23"/>
                                 <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <nil key="textColor"/>
@@ -39,6 +39,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="iiw-q3-J9B" firstAttribute="leading" secondItem="Eja-er-ubE" secondAttribute="leading" constant="40" id="2Vj-bt-Pej"/>
                             <constraint firstItem="KTW-uJ-s9W" firstAttribute="top" secondItem="Eja-er-ubE" secondAttribute="top" constant="132" id="97s-q7-VlX"/>
                             <constraint firstAttribute="trailing" secondItem="3DX-gL-kpu" secondAttribute="trailing" id="EpX-aG-M6H"/>
                             <constraint firstItem="iiw-q3-J9B" firstAttribute="centerX" secondItem="Eja-er-ubE" secondAttribute="centerX" id="Mej-rM-Gvm"/>
@@ -48,6 +49,7 @@
                             <constraint firstAttribute="trailing" secondItem="KTW-uJ-s9W" secondAttribute="trailing" constant="40" id="bZw-B6-fQv"/>
                             <constraint firstItem="3DX-gL-kpu" firstAttribute="top" secondItem="Eja-er-ubE" secondAttribute="top" id="iBw-ff-5B2"/>
                             <constraint firstAttribute="bottom" secondItem="3DX-gL-kpu" secondAttribute="bottom" id="lRy-nN-5Gt"/>
+                            <constraint firstAttribute="trailing" secondItem="iiw-q3-J9B" secondAttribute="trailing" constant="40" id="nY3-7E-z2m"/>
                             <constraint firstAttribute="bottom" secondItem="KTW-uJ-s9W" secondAttribute="bottom" constant="16" id="p2v-sI-1nk"/>
                         </constraints>
                     </view>

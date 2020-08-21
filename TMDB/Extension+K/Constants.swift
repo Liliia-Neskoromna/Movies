@@ -10,13 +10,10 @@ struct K {
     
     static let cellIdentifire = "CustomCell"
     static let nibName = "FilmCustomCell"
+    static var nextPage = 1
     
     struct Urls {
         static let baseUrl = "https://api.themoviedb.org/3/movie"
-        
-//        static let popular = "/popular"
-//        static let toprated = "/top_rated"
-//        static let upcoming = "/upcoming"
     }
     
     enum CurrentCategory: String {

@@ -15,15 +15,24 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var segmentControll: UISegmentedControl!
     
+    var loadingData = false
+    private let utilites = Utilities.sharedUtilities
+    static var newPage = " "
+    
+    var arrayTabs = [CGFloat(0.0), CGFloat(0.0), CGFloat(0.0)]
+    
     var filmsManager = FilmsManager()
     var films = [FilmModel]() {
         didSet {
             DispatchQueue.main.async {
                 self.myTableView.reloadData()
+                if self.myTableView.numberOfRows(inSection: 0) != 0 {
+                    self.myTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                }
             }
         }
     }
-        
+    
     override func viewDidAppear(_ animated: Bool) {
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.black
@@ -38,17 +47,16 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let nib = UINib.init(nibName: K.nibName, bundle: nil)
         self.myTableView.register(nib, forCellReuseIdentifier: K.cellIdentifire)
         
-        
         myTableView.dataSource = self
         myTableView.delegate = self
         filmsManager.delegate = self
         filmsManager.loadSegmentData(index: 0)
+        
     }
     
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
         filmsManager.loadSegmentData(index: sender.selectedSegmentIndex)
     }
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

@@ -15,6 +15,14 @@ class FilmCustomCell: UITableViewCell {
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var cellView: UIView!
     
+//    var filmViewModel: FilmViewModel! {
+//        didSet {
+//            titleLabel.text = filmViewModel.title
+//            overviewLabel.text = filmViewModel.overview
+//            backDropImage.imageFromServerURL(filmViewModel.posterPath)
+//        }
+//    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -24,3 +32,4 @@ class FilmCustomCell: UITableViewCell {
     }
     
 }
+

@@ -11,13 +11,12 @@ import Foundation
 class Utilities {
     
     static let sharedUtilities = Utilities()
-
-    func getParams(page: String = "1") -> [String: String] {
+    
+    func getParams(page: Int) -> [String: String] {
         return [
             "api_key": "76984f3d864f02cb288e53d24f6e7d6b",
             "language": "ru-Ru",
             "page": "\(page)"
         ]
     }
-    
 }

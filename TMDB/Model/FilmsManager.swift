@@ -22,6 +22,7 @@ class FilmsManager {
             delegate?.didUpdateFilmsList(films: filmList)
         }
     }
+    
     private var popular = [FilmModel]()
     private var upcoming = [FilmModel]()
     private var topRated = [FilmModel]()

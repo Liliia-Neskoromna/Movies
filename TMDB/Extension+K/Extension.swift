@@ -46,7 +46,6 @@ extension FilmViewController {
             loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
             loadingView.center = self.view?.center as! CGPoint
             loadingView.backgroundColor = UIColor.gray
-//            (named: "#444444")
             loadingView.alpha = 0.7
             loadingView.clipsToBounds = true
             loadingView.layer.cornerRadius = 10
