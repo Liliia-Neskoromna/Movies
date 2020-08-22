@@ -28,11 +28,12 @@ class FilmsManager {
     private var topRated = [FilmModel]()
     private let network = NetworkRequest.shared
     
-    func loadSegmentData(index: Int) -> Void {
+    func loadSegmentData(index: Int, pageNum: Int) -> Void {
         if index == 0 {
             if popular.count == 0 {
                 self.delegate?.showActivityIndicator()
-                network.loadData(.popular, completion: { [weak self] data in
+                 let nextPage = (filmList.count / 20) + 1
+                network.loadData(.popular, pageNum: nextPage, completion: { [weak self] data in
                     self?.popular = data
                     self?.filmList = data
                     self?.delegate?.hideActivityIndicator()
@@ -43,7 +44,8 @@ class FilmsManager {
         } else if index == 1 {
             if upcoming.count == 0 {
                 self.delegate?.showActivityIndicator()
-                network.loadData(.upcoming, completion: { [weak self] data in
+                 let nextPage = (filmList.count / 20) + 1
+                network.loadData(.upcoming, pageNum: nextPage, completion: { [weak self] data in
                     self?.filmList = data
                     self?.upcoming = data
                     self?.delegate?.hideActivityIndicator()
@@ -54,7 +56,8 @@ class FilmsManager {
         } else if index == 2 {
             if topRated.count == 0 {
                 self.delegate?.showActivityIndicator()
-                network.loadData(.topRated, completion: { [weak self] data in
+                 let nextPage = (filmList.count / 20) + 1
+                network.loadData(.topRated, pageNum: nextPage, completion: { [weak self] data in
                     self?.filmList = data
                     self?.topRated = data
                     self?.delegate?.hideActivityIndicator()

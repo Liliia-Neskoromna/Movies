@@ -15,25 +15,23 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var segmentControll: UISegmentedControl!
     
-    static let shared = FilmViewController()
     var loadingData = false
     private let utilites = Utilities.sharedUtilities
-     let storyboardIdentifier = "FilmDetailsViewController"
-//    static var newPage = " "
-    
-    var arrayTabs = [CGFloat(0.0), CGFloat(0.0), CGFloat(0.0)]
-    
+    private let network = NetworkRequest.shared
+    let storyboardIdentifier = "FilmDetailsViewController"
     var filmsManager = FilmsManager()
+    var currentPage : Int = 1
+    var isLoadingList : Bool = false
+    
     var films = [FilmModel]() {
         didSet {
             DispatchQueue.main.async {
                 self.myTableView.reloadData()
-                if self.myTableView.numberOfRows(inSection: 0) != 0 {
-                    self.myTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                }
             }
         }
     }
+    var category = K.CurrentCategory.popular
+    
     
     override func viewDidAppear(_ animated: Bool) {
         let nav = self.navigationController?.navigationBar
@@ -52,12 +50,13 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
         myTableView.dataSource = self
         myTableView.delegate = self
         filmsManager.delegate = self
-        filmsManager.loadSegmentData(index: 0)
+        filmsManager.loadSegmentData(index: 0, pageNum: 1)
         
     }
     
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
-        filmsManager.loadSegmentData(index: sender.selectedSegmentIndex)
+        let nextPage = (films.count / 20) + 1
+        filmsManager.loadSegmentData(index: sender.selectedSegmentIndex, pageNum: nextPage)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -86,7 +85,30 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
             filmDetailsViewController.id = self.films[indexPath.row].id
             present(filmDetailsViewController, animated: true)
         }
-
     }
     
+    func loadMoreItemsForList() {
+        if isLoadingList {
+            return
+        }
+        isLoadingList = !isLoadingList
+        currentPage = (films.count / 20) + 1
+        network.loadData(category, pageNum: currentPage, completion: { (films) in
+            if films.count > 0 {
+                self.films =  self.films + films
+            }
+            self.isLoadingList = !self.isLoadingList
+        })
+        print(currentPage)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            loadMoreItemsForList()
+        }
+    }
 }

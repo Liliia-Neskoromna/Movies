@@ -32,11 +32,11 @@ extension UIImageView {
         }
     }
 }
+
 // MARK: - Extension for FilmViewController
 
 var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
 var loadingView: UIView = UIView()
-var view = FilmViewController.init().view.self
 
 extension FilmViewController {
     

@@ -6,11 +6,14 @@
 //  Copyright © 2020 Liliia. All rights reserved.
 //
 
+//private let utilites = FilmViewController.shared
+
 struct K {
     
     static let cellIdentifire = "CustomCell"
     static let nibName = "FilmCustomCell"
     static var nextPage = 1
+    
     
     struct Urls {
         static let baseUrl = "https://api.themoviedb.org/3/movie"

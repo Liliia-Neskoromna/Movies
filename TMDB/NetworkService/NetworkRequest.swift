@@ -15,10 +15,10 @@ class NetworkRequest {
     static let shared = NetworkRequest()
     private let utilites = Utilities.sharedUtilities
     
-    func loadData(_ segment: K.CurrentCategory, completion: @escaping ([FilmModel]) -> Void) {
+    func loadData(_ segment: K.CurrentCategory, pageNum: Int, completion: @escaping ([FilmModel]) -> Void) {
         
         var filmArray = [FilmModel]()
-        AF.request(K.Urls.baseUrl + segment.urlString, method: .get, parameters: utilites.getParams(page: K.nextPage)).responseJSON { (response) in
+        AF.request(K.Urls.baseUrl + segment.urlString, method: .get, parameters: utilites.getParams(page: pageNum)).responseJSON { (response) in
             
             switch response.result {
             case .success:
@@ -40,8 +40,8 @@ class NetworkRequest {
                     let film = FilmModel(id: id, title: title, overview: overview, posterPath: fullImage)
                     
                     filmArray.append(film)
-                    completion(filmArray)
                 }
+                completion(filmArray)
                 
             case let .failure(error):
                 print(error)
