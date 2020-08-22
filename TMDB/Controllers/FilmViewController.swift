@@ -99,7 +99,6 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             self.isLoadingList = !self.isLoadingList
         })
-        print(currentPage)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
