@@ -48,7 +48,6 @@ class FilmDetailsViewController: UIViewController {
         overviewLabel?.text = filmsDetails[0].overview
         releaseDataLabel?.text = filmsDetails[0].releaseDate
         let roudPopularity = filmsDetails[0].popularity.rounded()
-//            .truncatingRemainder(dividingBy: 100)
         popularityLabel?.text = String(roudPopularity)
     }
     

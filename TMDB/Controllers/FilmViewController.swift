@@ -86,13 +86,7 @@ class FilmViewController: UIViewController, UITableViewDataSource, UITableViewDe
             filmDetailsViewController.id = self.films[indexPath.row].id
             present(filmDetailsViewController, animated: true)
         }
-        
-//        let urlString = articles[indexPath.row].url
-//        let webViewIdentifier = WebViewController.storyboardIdentifier
-//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-//        if let webViewController = storyboard.instantiateViewController(identifier: webViewIdentifier) as? WebViewController {
-//            webViewController.url = urlString
-//            present(webViewController, animated: true)
-//        }
+
     }
+    
 }

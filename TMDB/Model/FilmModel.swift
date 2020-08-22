@@ -15,7 +15,4 @@ struct FilmModel {
     var overview: String
     var posterPath: String
     
-//    init(id: Int) {
-//        self.id = id
-//    }
 }
